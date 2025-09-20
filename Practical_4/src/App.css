@@ -1,0 +1,9 @@
+/* This file is no longer needed - all styles have been moved inline to App.jsx */
+/* Keeping this file for compatibility, but it's empty now */
+/* All styling now follows the same inline approach as other practicals for consistency */
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+}
