@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Real-Time Voting System</title>
+    <style>
+      :root {
+        --color-primary: #666;
+        --color-primary-hover: #555;
+        --color-bg: #f5f5f5;
+        --color-text: #333;
+        --color-border: #ddd;
+        --color-card: #fff;
+        --spacing: 16px;
+      }
+      body {
+        background: var(--color-bg);
+        color: var(--color-text);
+        font-family: "Arial", sans-serif;
+        margin: 0;
+        padding: 20px;
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .container {
+        background: var(--color-card);
+        padding: 40px;
+        max-width: 400px;
+        width: 100%;
+        text-align: center;
+      }
+      h1 {
+        font-size: 24px;
+        font-weight: normal;
+        margin-bottom: 30px;
+        text-align: center;
+        color: var(--color-text);
+      }
+      .poll {
+        display: flex;
+        flex-direction: row;
+        gap: 10px;
+        margin-bottom: 30px;
+        justify-content: center;
+        flex-wrap: wrap;
+      }
+      .vote-btn {
+        background: #fff;
+        color: var(--color-text);
+        border: 1px solid var(--color-border);
+        border-radius: 4px;
+        padding: 8px 16px;
+        font-size: 14px;
+        font-weight: normal;
+        cursor: pointer;
+        transition: background-color 0.2s ease;
+        margin-bottom: 0;
+      }
+      .vote-btn:hover {
+        background: #f8f8f8;
+      }
+      .results {
+        margin-top: 20px;
+      }
+      .result-row {
+        margin-bottom: 5px;
+        font-size: 14px;
+        color: var(--color-text);
+      }
+      .votes {
+        font-weight: normal;
+        color: var(--color-text);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Vote for Your Favorite Language</h1>
+      <div class="poll">
+        <button class="vote-btn" onclick="vote('JavaScript')">
+          JavaScript
+        </button>
+        <button class="vote-btn" onclick="vote('Python')">Python</button>
+        <button class="vote-btn" onclick="vote('Java')">Java</button>
+        <button class="vote-btn" onclick="vote('C++')">C++</button>
+      </div>
+      <div class="results">
+        <div class="result-row">
+          <span>JavaScript: <span class="votes" id="votes-JavaScript">0</span></span>
+        </div>
+        <div class="result-row">
+          <span>Python: <span class="votes" id="votes-Python">0</span></span>
+        </div>
+        <div class="result-row">
+          <span>Java: <span class="votes" id="votes-Java">0</span></span>
+        </div>
+        <div class="result-row">
+          <span>C++: <span class="votes" id="votes-C++">0</span></span>
+        </div>
+      </div>
+    </div>
+    <script>
+      // Votes object: keeps track of current vote counts
+      const votes = {
+        JavaScript: 0,
+        Python: 0,
+        Java: 0,
+        "C++": 0,
+      };
+
+      // Vote function: increments vote for selected language
+      function vote(language) {
+        votes[language]++;
+        updateVotes();
+      }
+
+      // UpdateVotes function: updates the displayed vote counts
+      function updateVotes() {
+        for (const lang in votes) {
+          document.getElementById("votes-" + lang).textContent = votes[lang];
+        }
+      }
+
+      // setInterval: simulates real-time updates from other users
+      setInterval(() => {
+        // Randomly pick a language to increment
+        const langs = Object.keys(votes);
+        const randomLang = langs[Math.floor(Math.random() * langs.length)];
+        votes[randomLang]++;
+        updateVotes();
+      }, 2000);
+    </script>
+  </body>
+</html>
